@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 4, "column": 0}, "map": {"version":3,"sources":["file:///Volumes/Disk-A/Products/Lawyer-Portal/lawyer-portal/web-nextjs/app/error.tsx"],"sourcesContent":["\"use client\";\n\nexport default function GlobalError({ error, reset }: { error: Error; reset: () => void }) {\n  return (\n    <div className=\"flex flex-col items-center justify-center min-h-screen\">\n      <h1 className=\"text-red-600 text-2xl font-bold\">Something went wrong!</h1>\n      <p className=\"text-gray-600 mt-2\">{error.message}</p>\n\n      <button\n        onClick={reset}\n        className=\"mt-4 bg-blue-600 text-white px-4 py-2 rounded-lg\"\n      >\n        Retry\n      </button>\n    </div>\n  );\n}\n"],"names":[],"mappings":";;;;;AAAA;;AAEe,SAAS,YAAY,EAAE,KAAK,EAAE,KAAK,EAAuC;IACvF,qBACE,6LAAC;QAAI,WAAU;;0BACb,6LAAC;gBAAG,WAAU;0BAAkC;;;;;;0BAChD,6LAAC;gBAAE,WAAU;0BAAsB,MAAM,OAAO;;;;;;0BAEhD,6LAAC;gBACC,SAAS;gBACT,WAAU;0BACX;;;;;;;;;;;;AAKP;KAdwB"}}]
+}
