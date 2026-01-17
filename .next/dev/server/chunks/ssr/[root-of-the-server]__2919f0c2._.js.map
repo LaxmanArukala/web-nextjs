@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 26, "column": 0}, "map": {"version":3,"sources":["file:///Volumes/Disk-A/Products/Lawyer-Portal/lawyer-portal/web-nextjs/app/lawyer-detail/%5Bid%5D/page.tsx"],"sourcesContent":["export default async function LawyerDetailPage({\n  params,\n}: {\n  params: Promise<{ id: number }>\n}) {\n    const { id } = await params\n    return (<div>\n         <div className=\"bg-white\">\n        <div className=\"max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4\">\n          <BreadcrumbsNav\n            items={[\n              { label: \"Home\", to: \"/\" },\n              { label: \"All Blogs\", to: \"/blog\" },\n              { label: blogPost?.data?.data?.title || \"Blog Details\" },\n            ]}\n          />\n        </div>\n      </div>\n    </div>)\n}"],"names":[],"mappings":";;;;;;AAAe,eAAe,iBAAiB,EAC7C,MAAM,EAGP;IACG,MAAM,EAAE,EAAE,EAAE,GAAG,MAAM;IACrB,qBAAQ,8OAAC;kBACJ,cAAA,8OAAC;YAAI,WAAU;sBAChB,cAAA,8OAAC;gBAAI,WAAU;0BACb,cAAA,8OAAC;oBACC,OAAO;wBACL;4BAAE,OAAO;4BAAQ,IAAI;wBAAI;wBACzB;4BAAE,OAAO;4BAAa,IAAI;wBAAQ;wBAClC;4BAAE,OAAO,UAAU,MAAM,MAAM,SAAS;wBAAe;qBACxD;;;;;;;;;;;;;;;;;;;;;AAKb"}}]
+}

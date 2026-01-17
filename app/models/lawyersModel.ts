@@ -37,6 +37,8 @@ export interface Lawyer {
 }
 
 export interface LawyerResponse {
+  message: string | undefined;
+  error: any;
   success: boolean;
   data: {
     data: Lawyer[];
@@ -48,4 +50,6 @@ export interface LawyerResponseById {
   data: {
     data: Lawyer;
   };
+  error?: boolean;
+  message?: string;
 }

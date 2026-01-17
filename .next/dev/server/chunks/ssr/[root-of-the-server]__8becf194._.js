@@ -153,7 +153,7 @@ const Header = ()=>{
             label: "Blog"
         },
         {
-            path: "/lawyers",
+            path: "/lawyers-list",
             label: "Find Lawyers"
         },
         {
