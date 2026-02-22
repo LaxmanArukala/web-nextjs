@@ -15,9 +15,10 @@ const Header = () => {
 
   const navItems = [
     { path: "/", label: "Home" },
+    { path: "/about-us", label: "About us" },
     { path: "/blog", label: "Blog" },
     { path: "/lawyers-list", label: "Find Lawyers" },
-    { path: "/discussions", label: "Discussions" },
+    // { path: "/discussions", label: "Discussions" },
     { path: "/contact", label: "Contact" },
   ];
 

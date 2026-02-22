@@ -16,6 +16,13 @@ interface Props {
     minExp?: string;
   }>;
 }
+
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Lawyers List",
+  description: "Browse verified lawyers by expertise and location",
+};
 export default async function Lawyers({ searchParams }: Props) {
   const params = await searchParams;
   const res: LawyerResponse = await getAllLawyers(params);

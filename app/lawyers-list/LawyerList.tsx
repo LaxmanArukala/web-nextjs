@@ -2,6 +2,7 @@ import { Lawyer } from "../models/lawyersModel";
 import Link from "next/link";
 import { MapPin, Star, Award, Clock, Phone, Eye } from "lucide-react";
 
+
 export default function LawyerList({ lawyers }: { lawyers: Lawyer[] }) {
   if (!lawyers.length) {
     return <p className="text-center mt-10">No lawyers found</p>;
@@ -11,7 +12,7 @@ export default function LawyerList({ lawyers }: { lawyers: Lawyer[] }) {
 
   // ========== Navigating to Details ==============
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-6">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 ">
       {lawyers.map((lawyer) => {
         const specializations = Array.isArray(lawyer.specilization)
           ? lawyer.specilization.join(", ")

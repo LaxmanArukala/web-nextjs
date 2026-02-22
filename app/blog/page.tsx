@@ -4,6 +4,12 @@ import{ getAllBlogs} from '../services/blogsService'
 import { BlogResponse} from '@/app/models/blogModel'
 import BlogList from "@/app/blog/BlogList";
 
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Blogs",
+  description: "Browse verified lawyers by expertise and location",
+};
 export default async function BlogPage() {
 
   const blogPosts :BlogResponse = await getAllBlogs(); 

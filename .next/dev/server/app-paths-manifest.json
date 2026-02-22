@@ -1,9 +1,0 @@
-{
-  "/_not-found/page": "app/_not-found/page.js",
-  "/blog-detail/[id]/page": "app/blog-detail/[id]/page.js",
-  "/blog/page": "app/blog/page.js",
-  "/lawyer-detail/[id]/page": "app/lawyer-detail/[id]/page.js",
-  "/lawyers-list/page": "app/lawyers-list/page.js",
-  "/login/page": "app/login/page.js",
-  "/page": "app/page.js"
-}

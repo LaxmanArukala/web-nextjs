@@ -54,19 +54,21 @@ const SignupPage: React.FC = () => {
   });
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
-      <div className="flex flex-col md:flex-row bg-white shadow-lg rounded-2xl overflow-hidden w-full max-w-5xl">
+    // min-h-screen flex items-center justify-center bg-gray-100
+    <div className=" px-4">
+      {/* max-w-5xl */}
+      <div className="flex flex-col md:flex-row bg-white overflow-hidden w-full">
         {/* LEFT SIDE - Welcome */}
-        <div className="hidden md:flex flex-col justify-center items-center bg-blue-600 text-white w-1/2 p-10">
-          <h2 className="text-3xl font-bold mb-4">Create Your Account</h2>
+        <div className="hidden md:flex flex-col justify-center items-cente w-1/2 p-10">
+          <h2 className="text-4xl font-bold mb-4">Create Your Account</h2>
           <p className="text-lg text-center mb-8">
             Register to access your personalized dashboard and location-based services.
           </p>
-          <img
+          {/* <img
             src="https://cdn-icons-png.flaticon.com/512/747/747376.png"
             alt="Signup Illustration"
             className="w-48 h-48"
-          />
+          /> */}
         </div>
 
         {/* RIGHT SIDE - Registration Form */}

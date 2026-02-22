@@ -48,11 +48,11 @@ const LoginPage: React.FC = () => {
           <p className="text-lg text-center mb-8">
             Log in to access your personalized dashboard and manage your account.
           </p>
-          <img
+          {/* <img
             src="https://cdn-icons-png.flaticon.com/512/2922/2922510.png"
             alt="Welcome Illustration"
             className="w-48 h-48"
-          />
+          /> */}
         </div>
 
         {/* RIGHT SIDE - LOGIN FORM */}

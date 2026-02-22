@@ -6,8 +6,39 @@ import {
   Bookmark,
 } from "lucide-react";
 import { getBlogById } from "@/app/services/blogsService";
-
+import type { Metadata } from "next";
 import BreadcrumbsNav from "@/app/components/Breadcrumb";
+
+// 2️⃣ generateMetadata (BEFORE default export)
+// export async function generateMetadata(
+//   { params }: { params: { id: number } }
+// ): Promise<Metadata> {
+//   const id = Number(params.id);
+
+//   if (isNaN(id)) {
+//     return {
+//       title: "Invalid Blog",
+//       robots: "noindex",
+//     };
+//   }
+
+//   const blogPost = await getBlogById(id);
+//   const blog = blogPost?.data?.data;
+
+//   if (!blog) {
+//     return {
+//       title: "Blog Not Found",
+//       description: "The requested blog does not exist",
+//       robots: "noindex",
+//     };
+//   }
+
+//   return {
+//     title: blog.title,
+//     description:
+//       blog.excerpt || blog.description?.slice(0, 160),
+//   };
+// }
 
 export default async function BlogDetailPage({
   params,
@@ -27,6 +58,7 @@ export default async function BlogDetailPage({
     throw new Error(blogPost?.message || "Failed to load blog");
   }
 
+  
   // Mock discussion data
   const discussion = {
     id: 1,

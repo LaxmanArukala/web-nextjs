@@ -1,17 +1,33 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-/node_modules
-/docs/node_modules
-/.pnp
-.pnp.js
+# /node_modules
+# /docs/node_modules
+# /.pnp
+# .pnp.js
 
-# testing
-/coverage
+# # testing
+# /coverage
 
-# production
-/dist
+# # production
 
+# dependencies
+node_modules/
+
+# next.js build output
+.next/
+out/
+
+# production builds
+build/
+dist/
+
+# environment files
+.env*
+!.env.example
+
+# misc
+.DS_Store
 
 # misc
 .eslintcache

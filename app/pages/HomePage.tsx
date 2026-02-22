@@ -1,5 +1,6 @@
 import React from 'react';
 import { ArrowRight, Users, BookOpen, MessageCircle, Shield, Clock, Star } from 'lucide-react';
+import Link from 'next/link';
 
 
 const HomePage = () => {
@@ -50,29 +51,32 @@ const HomePage = () => {
   return (
     <div>
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-blue-900 via-blue-800 to-blue-700 text-white py-20">
+      <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-900 via-blue-800 to-blue-700 text-white py-20">
         <div className="absolute inset-0 bg-black opacity-10"></div>
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="relative max-w-7xl mx-auto my-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
-              Your Trusted <span className="text-amber-400">Legal</span> Platform
+              Online <span className="text-amber-400">Lawyer Consultation</span> Anytime Anywhere
             </h1>
+            {/* <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+              Your Trusted <span className="text-amber-400">Legal</span> Platform
+            </h1> */}
             <p className="text-xl md:text-2xl mb-8 text-blue-100 max-w-3xl mx-auto">
               Connect with expert lawyers, access legal resources, and join discussions in our comprehensive legal platform.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a
-                
+              <Link
+                href='/lawyers-list'
                 className="bg-amber-500 text-blue-900 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-amber-400 transition-all duration-300 transform hover:scale-105 flex items-center justify-center"
               >
                 Find a Lawyer <ArrowRight className="ml-2 h-5 w-5" />
-              </a>
-              <a
-                
+              </Link>
+              <Link
+                href={"/blog"}
                 className="border-2 border-white text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-white hover:text-blue-900 transition-all duration-300 flex items-center justify-center"
               >
                 Read Legal Blog
-              </a>
+              </Link>
             </div>
           </div>
         </div>
