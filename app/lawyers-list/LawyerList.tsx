@@ -1,6 +1,8 @@
 import { Lawyer } from "../models/lawyersModel";
 import Link from "next/link";
 import { MapPin, Star, Award, Clock, Phone, Eye } from "lucide-react";
+import Image from "next/image";
+import FallbackImage from "../components/common/FallbackImage";
 
 
 export default function LawyerList({ lawyers }: { lawyers: Lawyer[] }) {
@@ -27,10 +29,17 @@ export default function LawyerList({ lawyers }: { lawyers: Lawyer[] }) {
         >
           <div className="p-6">
             <div className="flex items-start space-x-4">
-              <img
-                src={lawyer.image || ""}
+              {/* <img
+                src={lawyer.image || "/images/default-avatar.png"}
                 alt={lawyer.first_name}
                 className="w-20 h-20 rounded-full object-cover"
+              /> */}
+              <FallbackImage
+                src={lawyer.image}
+                alt={lawyer.first_name}
+                width={80}
+                height={80}
+                className="rounded-full object-cover"
               />
               <div className="flex-1">
                 <div className="flex items-start justify-between">

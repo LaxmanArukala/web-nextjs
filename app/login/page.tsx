@@ -1,15 +1,30 @@
 "use client";
 
-import React from "react";
-import  Link  from "next/link";
-import { useRouter } from "next/navigation";
+import React, { Suspense, useEffect } from "react";
+import Link from "next/link";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useAuth } from "../contexts/AuthContext";
 
-const LoginPage: React.FC = () => {
-  const { login } = useAuth();
+function safeRedirectPath(from: string | null): string | null {
+  if (!from || !from.startsWith("/") || from.startsWith("//")) return null;
+  return from;
+}
+
+function LoginForm() {
+  const { login, isAuthenticated, isHydrated } = useAuth();
   const router = useRouter();
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    if (!isHydrated || !isAuthenticated) return;
+    const next = safeRedirectPath(searchParams.get("from")) ?? "/user/dashboard";
+    router.replace(next);
+  }, [isHydrated, isAuthenticated, router, searchParams]);
+
+  const postLoginPath = () =>
+    safeRedirectPath(searchParams.get("from")) ?? "/user/dashboard";
 
   // ✅ Yup validation schema
   const validationSchema = Yup.object({
@@ -32,7 +47,7 @@ const LoginPage: React.FC = () => {
       // Dummy login
       if (values.email === "admin@example.com" && values.password === "123456") {
         login("dummy-token-123");
-        router.push("/user/dashboard");
+        router.push(postLoginPath());
       } else {
         alert("Invalid credentials");
       }
@@ -132,6 +147,18 @@ const LoginPage: React.FC = () => {
       </div>
     </div>
   );
-};
+}
+
+const LoginPage: React.FC = () => (
+  <Suspense
+    fallback={
+      <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
+        <div className="h-10 w-64 rounded-lg bg-gray-200 animate-pulse" aria-hidden />
+      </div>
+    }
+  >
+    <LoginForm />
+  </Suspense>
+);
 
 export default LoginPage;
