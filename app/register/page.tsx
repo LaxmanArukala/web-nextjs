@@ -1,9 +1,12 @@
 "use client";
 
 import React from "react";
+import Link from "next/link";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useRouter } from "next/navigation";
+import { ArrowRight, ShieldCheck, Sparkles } from "lucide-react";
+import { InputField, TextAreaField } from "../components/common/FormFields";
 
 const SignupPage: React.FC = () => {
   const router = useRouter();
@@ -45,6 +48,7 @@ const SignupPage: React.FC = () => {
       password: "",
       confirm_password: "",
     },
+    validateOnMount: true,
     validationSchema,
     onSubmit: (values) => {
       console.log("Registration Data:", values);
@@ -53,273 +57,259 @@ const SignupPage: React.FC = () => {
     },
   });
 
+  const requiredKeys = [
+    "first_name",
+    "last_name",
+    "email",
+    "phone",
+    "address",
+    "city",
+    "state",
+    "country",
+    "pincode",
+    "password",
+    "confirm_password",
+  ] as const;
+
+  const allRequiredFilled = requiredKeys.every(
+    (key) => formik.values[key].trim().length > 0
+  );
+  const canSubmit = allRequiredFilled && formik.isValid && !formik.isSubmitting;
+
+  const inputClass = (field: keyof typeof formik.values) =>
+    `w-full rounded-xl border bg-white/80 px-4 py-3 text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition ${
+      formik.touched[field] && formik.errors[field]
+        ? "border-red-400 ring-1 ring-red-200"
+        : "border-gray-200 hover:border-gray-300"
+    }`;
+
   return (
-    // min-h-screen flex items-center justify-center bg-gray-100
-    <div className=" px-4">
-      {/* max-w-5xl */}
-      <div className="flex flex-col md:flex-row bg-white overflow-hidden w-full">
-        {/* LEFT SIDE - Welcome */}
-        <div className="hidden md:flex flex-col justify-center items-cente w-1/2 p-10">
-          <h2 className="text-4xl font-bold mb-4">Create Your Account</h2>
-          <p className="text-lg text-center mb-8">
-            Register to access your personalized dashboard and location-based services.
-          </p>
-          {/* <img
-            src="https://cdn-icons-png.flaticon.com/512/747/747376.png"
-            alt="Signup Illustration"
-            className="w-48 h-48"
-          /> */}
+    <div className="min-h-screen grid md:grid-cols-5 bg-white">
+      <aside className="relative md:col-span-2 flex min-h-[40vh] md:min-h-screen flex-col justify-center items-center bg-linear-to-br from-blue-700 to-indigo-700 px-6 py-12 sm:px-10 text-center text-white">
+        <div className="flex w-full max-w-md flex-col items-center gap-10">
+          <div className="flex flex-col items-center">
+            <div className="mb-5 inline-flex items-center gap-2 rounded-full bg-white/15 px-3 py-1 text-xs font-semibold tracking-wide">
+              <Sparkles className="h-3.5 w-3.5" />
+              LegalHub Portal
+            </div>
+            <h1 className="text-3xl font-bold leading-tight">
+              Create your account and manage all legal actions in one place.
+            </h1>
+            <p className="mt-4 text-sm leading-6 text-blue-100">
+              Track cases, pay online, and get support quickly with a secure dashboard experience.
+            </p>
+          </div>
+
+          <div className="w-full rounded-2xl border border-white/10 bg-white/10 p-4">
+            <p className="flex items-center justify-center gap-2 text-sm font-medium">
+              <ShieldCheck className="h-4 w-4 shrink-0" />
+              Privacy-first access
+            </p>
+            <p className="mt-2 text-xs leading-relaxed text-blue-100">
+              Your account details and activity stay available only to authenticated users.
+            </p>
+          </div>
         </div>
+      </aside>
 
-        {/* RIGHT SIDE - Registration Form */}
-        <div className="w-full md:w-1/2 p-8">
-          <h2 className="text-2xl font-semibold text-center mb-6 text-gray-800">
-            Sign Up
-          </h2>
+      <section className="md:col-span-3 flex items-center bg-linear-to-br from-blue-50 via-indigo-50 to-white px-4 py-10 sm:px-8 sm:py-12 lg:px-12">
+        <div className="mx-auto w-full max-w-3xl">
+          <div className="mb-7">
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">Sign up</h2>
+            <p className="mt-2 text-sm text-gray-600">
+              Enter your details to create your LegalHub account.
+            </p>
+          </div>
 
-          <form onSubmit={formik.handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {/* First Name */}
-            <div>
-              <label className="block text-gray-700 mb-1">First Name</label>
-              <input
+          <form onSubmit={formik.handleSubmit} className="space-y-6">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+              <InputField
+                id="first_name"
                 name="first_name"
                 type="text"
+                label="First Name"
+                required
+                placeholder="John"
                 value={formik.values.first_name}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                className={`w-full p-2 border rounded ${
-                  formik.touched.first_name && formik.errors.first_name
-                    ? "border-red-500"
-                    : "border-gray-300"
-                }`}
+                error={formik.touched.first_name ? formik.errors.first_name : undefined}
+                inputClassName={inputClass("first_name")}
               />
-              {formik.touched.first_name && formik.errors.first_name && (
-                <p className="text-red-500 text-sm">{formik.errors.first_name}</p>
-              )}
-            </div>
 
-            {/* Last Name */}
-            <div>
-              <label className="block text-gray-700 mb-1">Last Name</label>
-              <input
+              <InputField
+                id="last_name"
                 name="last_name"
                 type="text"
+                label="Last Name"
+                required
+                placeholder="Doe"
                 value={formik.values.last_name}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                className={`w-full p-2 border rounded ${
-                  formik.touched.last_name && formik.errors.last_name
-                    ? "border-red-500"
-                    : "border-gray-300"
-                }`}
+                error={formik.touched.last_name ? formik.errors.last_name : undefined}
+                inputClassName={inputClass("last_name")}
               />
-              {formik.touched.last_name && formik.errors.last_name && (
-                <p className="text-red-500 text-sm">{formik.errors.last_name}</p>
-              )}
             </div>
 
-            {/* Email */}
-            <div>
-              <label className="block text-gray-700 mb-1">Email</label>
-              <input
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+              <InputField
+                id="email"
                 name="email"
                 type="email"
+                label="Email"
+                required
+                placeholder="john@email.com"
                 value={formik.values.email}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                className={`w-full p-2 border rounded ${
-                  formik.touched.email && formik.errors.email
-                    ? "border-red-500"
-                    : "border-gray-300"
-                }`}
+                error={formik.touched.email ? formik.errors.email : undefined}
+                inputClassName={inputClass("email")}
               />
-              {formik.touched.email && formik.errors.email && (
-                <p className="text-red-500 text-sm">{formik.errors.email}</p>
-              )}
-            </div>
 
-            {/* Phone */}
-            <div>
-              <label className="block text-gray-700 mb-1">Phone</label>
-              <input
+              <InputField
+                id="phone"
                 name="phone"
                 type="text"
+                label="Phone"
+                required
+                placeholder="9876543210"
                 value={formik.values.phone}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                className={`w-full p-2 border rounded ${
-                  formik.touched.phone && formik.errors.phone
-                    ? "border-red-500"
-                    : "border-gray-300"
-                }`}
+                error={formik.touched.phone ? formik.errors.phone : undefined}
+                inputClassName={inputClass("phone")}
               />
-              {formik.touched.phone && formik.errors.phone && (
-                <p className="text-red-500 text-sm">{formik.errors.phone}</p>
-              )}
             </div>
 
-            {/* Address */}
-            <div className="md:col-span-2">
-              <label className="block text-gray-700 mb-1">Address</label>
-              <textarea
-                name="address"
-                rows={2}
-                value={formik.values.address}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                className={`w-full p-2 border rounded ${
-                  formik.touched.address && formik.errors.address
-                    ? "border-red-500"
-                    : "border-gray-300"
-                }`}
-              />
-              {formik.touched.address && formik.errors.address && (
-                <p className="text-red-500 text-sm">{formik.errors.address}</p>
-              )}
-            </div>
+            <TextAreaField
+              id="address"
+              name="address"
+              rows={3}
+              label="Address"
+              required
+              placeholder="House no, street, area"
+              value={formik.values.address}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              error={formik.touched.address ? formik.errors.address : undefined}
+              inputClassName={inputClass("address")}
+            />
 
-            {/* City */}
-            <div>
-              <label className="block text-gray-700 mb-1">City</label>
-              <input
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+              <InputField
+                id="city"
                 name="city"
                 type="text"
+                label="City"
+                required
+                placeholder="Hyderabad"
                 value={formik.values.city}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                className={`w-full p-2 border rounded ${
-                  formik.touched.city && formik.errors.city
-                    ? "border-red-500"
-                    : "border-gray-300"
-                }`}
+                error={formik.touched.city ? formik.errors.city : undefined}
+                inputClassName={inputClass("city")}
               />
-              {formik.touched.city && formik.errors.city && (
-                <p className="text-red-500 text-sm">{formik.errors.city}</p>
-              )}
-            </div>
 
-            {/* State */}
-            <div>
-              <label className="block text-gray-700 mb-1">State</label>
-              <input
+              <InputField
+                id="state"
                 name="state"
                 type="text"
+                label="State"
+                required
+                placeholder="Telangana"
                 value={formik.values.state}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                className={`w-full p-2 border rounded ${
-                  formik.touched.state && formik.errors.state
-                    ? "border-red-500"
-                    : "border-gray-300"
-                }`}
+                error={formik.touched.state ? formik.errors.state : undefined}
+                inputClassName={inputClass("state")}
               />
-              {formik.touched.state && formik.errors.state && (
-                <p className="text-red-500 text-sm">{formik.errors.state}</p>
-              )}
-            </div>
 
-            {/* Country */}
-            <div>
-              <label className="block text-gray-700 mb-1">Country</label>
-              <input
+              <InputField
+                id="country"
                 name="country"
                 type="text"
+                label="Country"
+                required
+                placeholder="India"
                 value={formik.values.country}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                className={`w-full p-2 border rounded ${
-                  formik.touched.country && formik.errors.country
-                    ? "border-red-500"
-                    : "border-gray-300"
-                }`}
+                error={formik.touched.country ? formik.errors.country : undefined}
+                inputClassName={inputClass("country")}
               />
-              {formik.touched.country && formik.errors.country && (
-                <p className="text-red-500 text-sm">{formik.errors.country}</p>
-              )}
             </div>
 
-            {/* Pincode */}
-            <div>
-              <label className="block text-gray-700 mb-1">Pincode</label>
-              <input
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+              <InputField
+                id="pincode"
                 name="pincode"
                 type="text"
+                label="Pincode"
+                required
+                placeholder="500001"
                 value={formik.values.pincode}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                className={`w-full p-2 border rounded ${
-                  formik.touched.pincode && formik.errors.pincode
-                    ? "border-red-500"
-                    : "border-gray-300"
-                }`}
+                error={formik.touched.pincode ? formik.errors.pincode : undefined}
+                inputClassName={inputClass("pincode")}
               />
-              {formik.touched.pincode && formik.errors.pincode && (
-                <p className="text-red-500 text-sm">{formik.errors.pincode}</p>
-              )}
+
+              <div className="hidden sm:block" />
             </div>
 
-            {/* Password */}
-            <div>
-              <label className="block text-gray-700 mb-1">Password</label>
-              <input
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+              <InputField
+                id="password"
                 name="password"
                 type="password"
+                label="Password"
+                required
+                placeholder="Minimum 6 characters"
                 value={formik.values.password}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                className={`w-full p-2 border rounded ${
-                  formik.touched.password && formik.errors.password
-                    ? "border-red-500"
-                    : "border-gray-300"
-                }`}
+                error={formik.touched.password ? formik.errors.password : undefined}
+                inputClassName={inputClass("password")}
               />
-              {formik.touched.password && formik.errors.password && (
-                <p className="text-red-500 text-sm">{formik.errors.password}</p>
-              )}
-            </div>
 
-            {/* Confirm Password */}
-            <div>
-              <label className="block text-gray-700 mb-1">Confirm Password</label>
-              <input
+              <InputField
+                id="confirm_password"
                 name="confirm_password"
                 type="password"
+                label="Confirm Password"
+                required
+                placeholder="Repeat password"
                 value={formik.values.confirm_password}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                className={`w-full p-2 border rounded ${
-                  formik.touched.confirm_password && formik.errors.confirm_password
-                    ? "border-red-500"
-                    : "border-gray-300"
-                }`}
+                error={formik.touched.confirm_password ? formik.errors.confirm_password : undefined}
+                inputClassName={inputClass("confirm_password")}
               />
-              {formik.touched.confirm_password && formik.errors.confirm_password && (
-                <p className="text-red-500 text-sm">{formik.errors.confirm_password}</p>
-              )}
             </div>
 
-            {/* Submit Button */}
-            <div className="md:col-span-2 mt-4">
-              <button
-                type="submit"
-                className="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition"
-              >
-                Sign Up
-              </button>
-            </div>
+            <button
+              type="submit"
+              disabled={!canSubmit}
+              className={`inline-flex w-full items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-semibold transition focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                canSubmit
+                  ? "bg-blue-600 text-white shadow-lg shadow-blue-200 hover:bg-blue-700"
+                  : "cursor-not-allowed bg-gray-300 text-gray-600"
+              }`}
+            >
+              Create account
+              <ArrowRight className="h-4 w-4" aria-hidden />
+            </button>
           </form>
 
-          <p className="text-center mt-4 text-gray-600 text-sm">
+          <p className="mt-6 text-center text-sm text-gray-600">
             Already have an account?{" "}
-            <span
-              className="text-blue-600 cursor-pointer hover:underline"
-              onClick={() => router.push("/login")}
-            >
+            <Link href="/login" className="font-semibold text-blue-600 hover:text-blue-700 hover:underline">
               Login
-            </span>
+            </Link>
           </p>
         </div>
-      </div>
+      </section>
     </div>
   );
 };

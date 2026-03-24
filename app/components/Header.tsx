@@ -104,6 +104,7 @@ const Header = () => {
     { path: "/about-us", label: "About us" },
     { path: "/blog", label: "Blog" },
     { path: "/lawyers-list", label: "Find Lawyers" },
+    { path: "/lawyer-registration", label: "Lawyer registration" },
     // { path: "/discussions", label: "Discussions" },
     { path: "/contact", label: "Contact" },
   ];

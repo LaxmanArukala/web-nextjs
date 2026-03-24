@@ -1,5 +1,6 @@
-import React from 'react';
-import { Scale, Mail, Phone, MapPin, Facebook, Twitter, Linkedin } from 'lucide-react';
+import React from "react";
+import Link from "next/link";
+import { Scale, Mail, Phone, MapPin, Facebook, Twitter, Linkedin } from "lucide-react";
 
 const Footer = () => {
   return (
@@ -26,10 +27,31 @@ const Footer = () => {
           <div>
             <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
             <ul className="space-y-2">
-              <li><a href="/blog" className="text-gray-300 hover:text-white transition-colors">Legal Blog</a></li>
-              <li><a href="/lawyers" className="text-gray-300 hover:text-white transition-colors">Find Lawyers</a></li>
-              <li><a href="/discussions" className="text-gray-300 hover:text-white transition-colors">Discussions</a></li>
-              <li><a href="/contact" className="text-gray-300 hover:text-white transition-colors">Contact Us</a></li>
+              <li>
+                <Link href="/blog" className="text-gray-300 hover:text-white transition-colors">
+                  Legal Blog
+                </Link>
+              </li>
+              <li>
+                <Link href="/lawyers-list" className="text-gray-300 hover:text-white transition-colors">
+                  Find Lawyers
+                </Link>
+              </li>
+              <li>
+                <Link href="/lawyer-registration" className="text-gray-300 hover:text-white transition-colors">
+                  Lawyer registration
+                </Link>
+              </li>
+              <li>
+                <Link href="/discussions" className="text-gray-300 hover:text-white transition-colors">
+                  Discussions
+                </Link>
+              </li>
+              <li>
+                <Link href="/contact" className="text-gray-300 hover:text-white transition-colors">
+                  Contact Us
+                </Link>
+              </li>
             </ul>
           </div>
 
